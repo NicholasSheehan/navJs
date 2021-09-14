@@ -9,7 +9,7 @@ Js library to get client properties
   - [all]
 
 
-<a href="http://hictech.github.io/navJs/tester/index.html" target="_blank"><img alt="tester" src="https://raw.githubusercontent.com/hicTech/navJs/gh-pages/tester.png" title="tester"/></a>
+<a href="http://nicholassheehan.github.io/navJs/tester/index.html" target="_blank"><img alt="tester" src="https://raw.githubusercontent.com/hicTech/navJs/gh-pages/tester.png" title="tester"/></a>
 
 ## Usage
 ```html
@@ -81,8 +81,8 @@ MIT......
 
    [jquery]: <https://jquery.com/>
    [underscore]: <http://underscorejs.org/>
-   [tester]: <http://hictech.github.io/navJs/tester/index.html>
-   [all]: <http://hictech.github.io/navJs/>
+   [tester]: <http://nicholassheehan.github.io/navJs/tester/index.html>
+   [all]: <http://nicholassheehan.github.io/navJs/>
    [underscore+]: <http://hictech.com/>
 
 
