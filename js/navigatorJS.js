@@ -1,11 +1,10 @@
 /*
 
- NavigatorJS 0.2
- https://github.com/hicTech/navigatorJs
- www.hictech.com
+ NavigatorJS 0.3 
+ Modified by Nicholas Sheehan
+ * Added support for iOS 13+
 
  */
-
 
 var navJS = {
 
@@ -81,7 +80,7 @@ var navJS = {
              * If the check is passed the M variabled
              * is replaced and the code continue like
              * other browers. 
-             */ 
+             */
             tem = ua.match(/(edge(?=\/))\/?\s*(\d+)/i);
             if( !!tem ) {
                 M = tem;
@@ -119,7 +118,17 @@ var navJS = {
 
 
     isMobile: function () {
-        return this.userAgent().match(/iPhone|iPad|iPod|Android|BlackBerry|Opera Mini|IEMobile|CRiOS|OPiOS|Mobile|FxiOS/i) != null;
+        
+        if (this.userAgent().match(/iPhone|iPad|iPod|Android|BlackBerry|Opera Mini|IEMobile|CRiOS|OPiOS|Mobile|FxiOS/i) != null) {
+            return true;
+        }
+        
+        // Safari on iOS 13+ report as a Mac, but we can tell if it's a mobile device by checking the Touch status
+        if (this.isSafari() && this.isTouch() && this.maxTouchPoints > 0) {
+            return true;
+        }
+        
+        return false;
     },
     isDesktop: function () {
         return !this.isMobile();
@@ -193,7 +202,16 @@ var navJS = {
 
 
     isIOS: function () {
-        return this.userAgent().match(/iPhone|iPad|iPod/i) != null;
+        
+        if (this.userAgent().match(/iPhone|iPad|iPod/i) != null) {
+            return true;
+        }
+        
+        if (this.isMobileSafari()) {
+            return true;
+        }
+        
+        return false;
     },
     isAndroid: function () {
         return this.userAgent().match(/Android/i) != null;
@@ -218,12 +236,23 @@ var navJS = {
 
 
     isIPad: function () {
-        isIPad = (/ipad/gi).test(navigator.platform);
-        return isIPad;
+        var isIpad = (/ipad/gi).test(navigator.platform);
+        
+        if (isIpad) { 
+            return true;
+        }
+
+        isIpad = this.isMobileSafari();
+        
+        if (isIpad) {
+            return true;
+        }
+        
+        return false;
     },
     isIPhone: function () {
-        isIPad = (/iphone/gi).test(navigator.platform);
-        return isIPad;
+        var isIphone = (/iphone/gi).test(navigator.platform);
+        return isIphone;
     },
     isLandscape: function () {
         if (window.innerHeight < window.innerWidth) {
